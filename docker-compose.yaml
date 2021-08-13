@@ -1,0 +1,21 @@
+version: "3.8"
+services:
+  python:
+    container_name: techful_inventory_contorol_python_container
+    build: ./docker/python/
+    image: techful_inventory_contorol_python_image
+    volumes:
+      - ./app:/opt/app
+    ports:
+      - "5000:5000"
+    environment:
+      TZ: "Asia/Tokyo"
+
+  nginx:
+    container_name: techful_inventory_contorol_nginx_container
+    build: ./docker/nginx/
+    image: techful_inventory_contorol_nginx_image
+    ports:
+      - 80:80
+    depends_on:
+      - python
